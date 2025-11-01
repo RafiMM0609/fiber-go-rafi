@@ -13,15 +13,88 @@ func main() {
 	CobaString()
 	KondisionalString()
 	pakaiStruct()
+	pakaiTagStruct()
+	pakaiSlice()
+	dataMap()
+	pemainBola := SepakBola{}
+	ManchesterUnited(pemainBola, true)
+	pemainBasket := Basket{}
+	ManchesterUnited(pemainBasket, true)
+}
+
+// penggunaan interface
+type Pemain interface {
+	Tendang(status bool) (string, error) 
+}
+
+type SepakBola struct {}
+func (s SepakBola) Tendang(status bool) (string, error) {
+	if status {
+		return "Tendangan Berhasil", nil
+	}
+	return "Tendangan Gagal", nil
+}
+
+type Basket struct {}
+func (b Basket) Tendang(status bool) (string, error){
+	if status {return  "Pelanggaran, basket pakai tangan", nil}
+	return "Tidak ada pelanggaran", nil
+}
+
+func ManchesterUnited(p Pemain, status bool){
+	fmt.Println("Eksekusi manchester united")
+	hasil, err := p.Tendang(status)
+	if err != nil {fmt.Println("Manchester united error:", err)}
+	fmt.Println("Ini hasil eksekusi :",hasil)
+}
+
+// penggunaan map dengan type any
+func dataMap(){
+	data_mahasiswa := map[string]any{
+		"name": "Rafi Mahrus",
+		"age": 22,
+		"ipk": 3.95,
+		"isGraduated": false,
+	}
+	fmt.Printf("Ini data mahasiswa : \n %v \n======\n", data_mahasiswa)
+	fmt.Printf("Nama : %v \n", data_mahasiswa["name"])
+}
+
+// penggunaan slice
+ var makanan = []string{"roti", "agar-agar", "nasi goreng", "sate"}
+
+ func pakaiSlice(){
+	// tambah item ke slice
+	makanan = append(makanan, "bakso")
+	fmt.Println("Pakai Slice:")
+	fmt.Println("Item terakhir : ",makanan[len(makanan)-1])
 }
 
 //  sintaks penggunaan struct
-
 type Pegawai struct {
 	id int
 	name string
 	age int
 	gender bool
+}
+
+// pakai tag di struct
+type Mahasiswa struct {
+	Id int `json:"id"`
+	Name string `json:"name"`
+	Age int `json:"age"`
+	Gender bool `json:"-"`
+}
+
+func pakaiTagStruct(){
+	data_rafi := Mahasiswa{
+		Id: 1,
+		Name: "Rafi Mahrus",
+		Age: 22,
+		Gender: false,
+	}
+	fmt.Printf("Data Mahasiswa: %v \n =======\n", data_rafi)
+	fmt.Printf("Saya adalah %v dengan usia %v\n", data_rafi.Name, data_rafi.Age)
 }
 
 func pakaiStruct(){
