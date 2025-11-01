@@ -2,6 +2,40 @@ package main
 
 import "fmt"
 
+func main() {
+	fmt.Println(nama_lengkap)
+	fmt.Println(usia)
+	fmt.Println(ipk)
+	fmt.Println(pintar)
+	printVariabelTanpaValue()
+	printKonstanta()
+	printKonversi()
+	CobaString()
+	KondisionalString()
+	pakaiStruct()
+}
+
+//  sintaks penggunaan struct
+
+type Pegawai struct {
+	id int
+	name string
+	age int
+	gender bool
+}
+
+func pakaiStruct(){
+	data_rafi := Pegawai{
+		id: 1,
+		name: "Rafi Mahrus",
+		age: 22,
+		gender: false,
+	}
+	fmt.Printf("Data Pegawai: %v \n =======\n", data_rafi)
+	fmt.Printf("Saya adalah %v dengan usia %v\n", data_rafi.name, data_rafi.age)
+}
+
+
 // sintaks deklarasi variabel dengan tipe
 
 var nama_lengkap string = "Rafi Mahrus"
@@ -88,16 +122,4 @@ func KondisionalString() {
 
 	message := getMessage(a)
 	fmt.Println(message)
-}
-
-func main() {
-	fmt.Println(nama_lengkap)
-	fmt.Println(usia)
-	fmt.Println(ipk)
-	fmt.Println(pintar)
-	printVariabelTanpaValue()
-	printKonstanta()
-	printKonversi()
-	CobaString()
-	KondisionalString()
 }
